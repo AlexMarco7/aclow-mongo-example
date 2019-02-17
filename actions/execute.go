@@ -10,18 +10,17 @@ import (
 	"github.com/mongodb/mongo-go-driver/mongo/options"
 )
 
-type Executor struct {
+type Execute struct {
 	app *aclow.App
 }
 
-func (t *Executor) Address() string { return "executor" }
+func (t *Execute) Address() string { return "execute" }
 
-func (t *Executor) Start(app *aclow.App) {
+func (t *Execute) Start(app *aclow.App) {
 	t.app = app
-	app.Publish("mongo@executor", aclow.Message{})
 }
 
-func (t *Executor) Execute(msg aclow.Message, call aclow.Caller) (aclow.Message, error) {
+func (t *Execute) Execute(msg aclow.Message, call aclow.Caller) (aclow.Message, error) {
 	client := t.app.Resources["db"].(*mongo.Client)
 	db := client.Database(t.app.Config["db_name"].(string))
 	cmdResult := db.RunCommand(context.TODO(), command(), &options.RunCmdOptions{})

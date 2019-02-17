@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/AlexMarco7/aclow"
-	"github.com/AlexMarco7/aclow-mongo/actions"
+	"github.com/AlexMarco7/aclow-mongo-example/actions"
 	"github.com/mongodb/mongo-go-driver/mongo"
 )
 
@@ -30,7 +30,7 @@ func main() {
 	connectOnMongo(app)
 
 	app.RegisterModule("mongo", []aclow.Node{
-		&actions.Executor{},
+		&actions.Execute{},
 	})
 
 	app.Wait()
