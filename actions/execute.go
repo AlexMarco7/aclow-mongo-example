@@ -14,7 +14,7 @@ type Execute struct {
 	app *aclow.App
 }
 
-func (t *Execute) Address() string { return "execute" }
+func (t *Execute) Address() []string { return []string{"execute"} }
 
 func (t *Execute) Start(app *aclow.App) {
 	t.app = app
@@ -39,12 +39,12 @@ func (t *Execute) Execute(msg aclow.Message, call aclow.Caller) (aclow.Message, 
 	return aclow.Message{Body: result}, nil
 }
 
-func command() bson.M {
-	return bson.M{
-		"aggregate": "my_coll",
-		"cursor":    bson.M{"batchSize": 1000},
-		"pipeline": bson.A{
+func command() bson.D {
+	return bson.D{
+		{"aggregate", "my_coll"},
+		{"cursor", bson.M{"batchSize": 1000}},
+		{"pipeline", bson.A{
 			bson.M{"$match": bson.M{"a": 1}},
-		},
+		}},
 	}
 }

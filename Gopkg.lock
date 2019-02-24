@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/AlexMarco7/aclow"
   packages = ["."]
-  revision = "b1e5491b1a04110a0a325e584d61c118766579bc"
+  revision = "5a9ee655c67b66a08705fc53c5b63670ef1496e7"
 
 [[projects]]
   name = "github.com/go-stack/stack"

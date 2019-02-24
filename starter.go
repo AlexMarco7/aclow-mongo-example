@@ -14,7 +14,7 @@ import (
 func main() {
 
 	startOpt := aclow.StartOptions{
-		ModuleName:    "module_name",
+		Debug:         true,
 		Host:          "localhost",
 		Port:          4222,
 		ClusterPort:   8222,
@@ -32,6 +32,9 @@ func main() {
 	app.RegisterModule("mongo", []aclow.Node{
 		&actions.Execute{},
 	})
+
+	time.Sleep(time.Second * 2)
+	app.Publish("mongo@execute", aclow.Message{})
 
 	app.Wait()
 }
